@@ -3,25 +3,20 @@ import "./App.css";
 import { Component } from "react";
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            name: "Antonio Brasilio",
-            counter: 0
-        };
-    }
-
+    state = {
+        name: "Antonio Brasilio",
+        counter: 0,
+    };
     handlePClick = () => {
-        console.log(this)
-        this.setState({ name: "Aysla", date: 'teste' })
-    }
+        console.log(this);
+        this.setState({ name: "Aysla", date: "teste" });
+    };
 
     handleAClick = (event) => {
         event.preventDefault();
         const { counter } = this.state;
         this.setState({ counter: counter + 1 });
-    }
+    };
 
     render() {
         const { name, counter } = this.state;
@@ -29,8 +24,11 @@ class App extends Component {
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
-                    <p onClick={this.handlePClick}>{name} e esse é o número agora {counter}</p>
-                    <a onClick={this.handleAClick}
+                    <p onClick={this.handlePClick}>
+                        {name} e esse é o número agora {counter}
+                    </p>
+                    <a
+                        onClick={this.handleAClick}
                         className="App-link"
                         href="https://reactjs.org"
                         target="_blank"
