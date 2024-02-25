@@ -3,56 +3,31 @@ import { Component } from "react";
 
 class App extends Component {
     state = {
-        counter: 0,
-        posts: [
-            {
-                id: 1,
-                title: "Title 1",
-                body: "Body 1",
-            },
-            {
-                id: 2,
-                title: "Title 2",
-                body: "Body 2",
-            },
-            {
-                id: 3,
-                title: "Title 3",
-                body: "Body 3",
-            },
-        ],
-    };
-
-    timeoutUpdate = null;
-
-    handleTimeout = () => {
-        let { posts, counter } = this.state;
-        counter++;
-        posts[0].title = "Title 1 Updated";
-        this.timeoutUpdate = setTimeout(() => {
-            this.setState({ posts, counter });
-        }, 1000);
+        posts: [],
     };
 
     componentDidMount() {
-        this.handleTimeout();
+        this.loadPosts();
     }
 
-    componentDidUpdate() {
-        this.handleTimeout();
-    }
+    loadPosts = async () => {
+        const postsResponse = fetch(
+            "https://jsonplaceholder.typicode.com/posts"
+        );
 
-    componentWillUnmount() {
-        clearTimeout(this.timeoutUpdate);
-    }
+        const [posts] = await Promise.all([postsResponse]);
+
+        const postJson = await posts.json();
+
+        this.setState({ posts: postJson });
+    };
 
     render() {
-        const { posts, counter } = this.state;
+        const { posts } = this.state;
         return (
             <div className="App">
-                <h1>{counter}</h1>
                 {posts.map((post) => (
-                    <div key={post.id}>
+                    <div id={post.id} key={post.id}>
                         <h1>{post.title}</h1>
                         <p>{post.body}</p>
                     </div>
