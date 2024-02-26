@@ -1,35 +1,21 @@
-import "./App.css";
 import { Component } from "react";
+
+import "./App.css";
+
+import { PostCard } from "./components/PostCard";
+import { loadPosts } from "./utils/load-posts";
 
 class App extends Component {
     state = {
         posts: [],
     };
 
-    componentDidMount() {
-        this.loadPosts();
+    async componentDidMount() {
+        await this.loadPosts();
     }
 
     loadPosts = async () => {
-        const postsResponse = fetch(
-            "https://jsonplaceholder.typicode.com/posts"
-        );
-
-        const imagesResponse = fetch(
-            "https://jsonplaceholder.typicode.com/photos"
-        );
-
-        const [posts, images] = await Promise.all([
-            postsResponse,
-            imagesResponse,
-        ]);
-
-        const postJson = await posts.json();
-        const imageJson = await images.json();
-
-        const postAndImages = postJson.map((post, index) => {
-            return { ...post, cover: imageJson[index].url, title: imageJson[index].title};
-        });
+        const postAndImages = await loadPosts();
 
         this.setState({ posts: postAndImages });
     };
@@ -40,17 +26,13 @@ class App extends Component {
             <section className="container">
                 <div className="posts">
                     {posts.map((post) => (
-                        <div className="post">
-                            <img src={post.cover} alt={post.title} />
-                            <div
-                                className="post-content"
-                                id={post.id}
-                                key={post.id}
-                            >
-                                <h1>{post.title}</h1>
-                                <p>{post.body}</p>
-                            </div>
-                        </div>
+                        <PostCard
+                            key={post.id}
+                            title={post.title}
+                            body={post.body}
+                            id={post.id}
+                            cover={post.cover}
+                        />
                     ))}
                 </div>
             </section>
