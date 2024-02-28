@@ -1,6 +1,7 @@
 import "./styles.css";
 
 export const TextInput = ({ searchValue, handleChange }) => {
+    
     return (
         <input
             placeholder="Type your search"
