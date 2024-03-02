@@ -37,6 +37,13 @@ describe("<Posts />", () => {
         expect(screen.getAllByText(/mock-body/i)).toHaveLength(3);
     });
 
+    it("should not render posts", () => {
+        render(<Posts  />);
+        expect(
+            screen.queryByRole("heading", { name: /mock-title/i })
+        ).not.toBeInTheDocument();
+    });
+
     it("should match snapshot", () => {
         render(<Posts {...props} />);
         expect(screen.getByTestId("posts-test-id")).toMatchSnapshot();
