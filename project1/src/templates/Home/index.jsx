@@ -36,7 +36,7 @@ export const Home = () => {
         setSearchValue(value);
     };
 
-    const handleLoadPosts = useCallback (async (page, postsPerPage) => {
+    const handleLoadPosts = useCallback(async (page, postsPerPage) => {
         const postAndImages = await loadPosts();
 
         setPosts(postAndImages.slice(page, postsPerPage));
@@ -46,6 +46,7 @@ export const Home = () => {
     useEffect(() => {
         handleLoadPosts(0, postsPerPage);
     }, [handleLoadPosts, postsPerPage]);
+    
     return (
         <section className="container">
             <div className="search-container">
