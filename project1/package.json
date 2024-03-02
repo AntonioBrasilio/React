@@ -15,7 +15,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --detectOpenHandles --runInBand",
-    "test-coverage": "react-scripts test --detectOpenHandles --runInBand --coverage",
+    "test-coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
