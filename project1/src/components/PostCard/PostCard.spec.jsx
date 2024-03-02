@@ -23,9 +23,7 @@ describe("<PostCard />", () => {
     });
 
     it("should match snapshot", () => {
-        expect.assertions(1);
-
         render(<PostCard {...props} />);
-        expect(screen.getByTestId('post-card-test-id')).toMatchSnapshot();
+        expect(screen.getByTestId("post-card-test-id")).toMatchSnapshot();
     });
 });

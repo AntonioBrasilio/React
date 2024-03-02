@@ -4,8 +4,6 @@ import { Button } from ".";
 
 describe("<Button />", () => {
     it("should render a button with text 'Load more'", () => {
-        expect.assertions(1);
-
         render(<Button text="Load more" />);
 
         const button = screen.getByRole("button", { name: /load more/i });
@@ -13,8 +11,6 @@ describe("<Button />", () => {
     });
 
     it("should call a function on button click", () => {
-        expect.assertions(1);
-
         const fn = jest.fn();
 
         render(<Button text="Load more" onClick={fn} />);
@@ -25,8 +21,6 @@ describe("<Button />", () => {
     });
 
     it("should disable button when disabled option is true", () => {
-        expect.assertions(1);
-
         render(<Button text="Load more" disabled={true} />);
 
         const button = screen.getByRole("button", { name: /load more/i });
@@ -34,8 +28,6 @@ describe("<Button />", () => {
     });
 
     it("should enable button when disabled option is false", () => {
-        expect.assertions(1);
-
         render(<Button text="Load more" disabled={false} />);
 
         const button = screen.getByRole("button", { name: /load more/i });
@@ -43,8 +35,6 @@ describe("<Button />", () => {
     });
 
     it("should match snapshot", () => {
-        expect.assertions(1);
-
         const fn = jest.fn();
 
         render(<Button text="Load more" onClick={fn} disabled={false} />);
