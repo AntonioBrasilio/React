@@ -16,9 +16,9 @@ export const Home = () => {
 
     const noMorePosts = page + postsPerPage >= allPosts.length;
 
-    const filteredPosts = !!searchValue
+    const filteredPosts = searchValue
         ? allPosts.filter((post) =>
-              post.title.toLowerCase().includes(searchValue.toLowerCase())
+              post.title.toLowerCase().includes(searchValue.toLowerCase()),
           )
         : posts;
 
@@ -46,7 +46,7 @@ export const Home = () => {
     useEffect(() => {
         handleLoadPosts(0, postsPerPage);
     }, [handleLoadPosts, postsPerPage]);
-    
+
     return (
         <section className="container">
             <div className="search-container">

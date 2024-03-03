@@ -12,11 +12,11 @@ describe("<PostCard />", () => {
 
         expect(screen.getByRole("img", { name: props.title })).toHaveAttribute(
             "src",
-            props.cover
+            props.cover,
         );
 
         expect(
-            screen.getByRole("heading", { name: props.title })
+            screen.getByRole("heading", { name: props.title }),
         ).toBeInTheDocument();
 
         expect(screen.getByText(props.body)).toBeInTheDocument();

@@ -29,18 +29,18 @@ describe("<Posts />", () => {
         render(<Posts {...props} />);
 
         expect(
-            screen.getAllByRole("heading", { name: /mock-title/i })
+            screen.getAllByRole("heading", { name: /mock-title/i }),
         ).toHaveLength(3);
-        expect(screen.getAllByRole("img", { name: /mock-title/i })).toHaveLength(
-            3
-        );
+        expect(
+            screen.getAllByRole("img", { name: /mock-title/i }),
+        ).toHaveLength(3);
         expect(screen.getAllByText(/mock-body/i)).toHaveLength(3);
     });
 
     it("should not render posts", () => {
-        render(<Posts  />);
+        render(<Posts />);
         expect(
-            screen.queryByRole("heading", { name: /mock-title/i })
+            screen.queryByRole("heading", { name: /mock-title/i }),
         ).not.toBeInTheDocument();
     });
 

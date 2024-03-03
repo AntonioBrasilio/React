@@ -2,11 +2,10 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { TextInput } from ".";
 
-const props = {};
-
 describe("<TextInput />", () => {
     it("should have a value on searchValue props", () => {
-        render(<TextInput searchValue={"mock-value"} />);
+        const fn = jest.fn();
+        render(<TextInput handleChange={fn} searchValue={"mock-value"} />);
 
         const input = screen.getByPlaceholderText(/type your search/i);
 
@@ -16,7 +15,7 @@ describe("<TextInput />", () => {
 
     it("should call handleChange function on each key pressed", () => {
         const fn = jest.fn();
-        render(<TextInput handleChange={fn} />);
+        render(<TextInput handleChange={fn} searchValue={"mock-value"} />);
 
         const input = screen.getByPlaceholderText(/type your search/i);
         const value = "mock-value";
