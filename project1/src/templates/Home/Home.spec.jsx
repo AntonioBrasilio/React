@@ -11,5 +11,11 @@ describe("Home", () => {
         const noMorePosts = screen.getByText("No more posts");
 
         await waitForElementToBeRemoved(noMorePosts);
+
+        const search = screen.getByPlaceholderText(/type your search/i);
+        expect(search).toBeInTheDocument();
+
+        const images = screen.getAllByRole("img");
+        expect(images).toHaveLength(10);
     });
 });
