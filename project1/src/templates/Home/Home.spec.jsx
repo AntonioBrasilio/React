@@ -1,6 +1,7 @@
 import {
     render,
     screen,
+    waitFor,
     waitForElementToBeRemoved,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -55,5 +56,25 @@ describe("Home", () => {
 
         userEvent.type(search, "testtesttesttesttest");
         expect(screen.getByText("No more posts")).toBeInTheDocument();
+    });
+
+    it("should load more posts when button is clicked", async () => {
+        render(<Home />);
+        const noMorePosts = screen.getByText("No more posts");
+
+        await waitForElementToBeRemoved(noMorePosts);
+
+        const button = screen.getByRole("button", { name: /load more/i });
+        userEvent.click(button);
+        waitFor(() => {
+            expect(screen.getAllByRole("heading")).toHaveLength(20);
+        });
+
+        for (let i = 0; i < 9; i++) {
+            userEvent.click(button);
+        }
+        waitFor(() => {
+            expect(button).toBeDisabled();
+        });
     });
 });
