@@ -4,3 +4,5 @@ React Developer Tools ------- Exntesion to see which site has react (and other f
 
 To correct multiple files, you can type npx eslint *DIR* --fix -> Example  npx eslint src/**/*.jsx --fix
 The pluggins to install = npm i -D prettier eslint-config-prettier eslint-plugin-prettier
+
+To deactivate rules for eslint, just copy the rule that is showing on error, then go in "rules" and set to "off" in esling config file
