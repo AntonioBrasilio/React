@@ -1,3 +1,6 @@
 https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/  ------  Explain how lifecycle works
 
 React Developer Tools ------- Exntesion to see which site has react (and other features to see props, state of the current website)
+
+To correct multiple files, you can type npx eslint *DIR* --fix -> Example  npx eslint src/**/*.jsx --fix
+The pluggins to install = npm i -D prettier eslint-config-prettier eslint-plugin-prettier
