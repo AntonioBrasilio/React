@@ -12,7 +12,7 @@ function App() {
     };
 
     const handleCounter = () => {
-        setCounter(counter + 1);
+        setCounter((prevCounter) => prevCounter + 1);
     };
 
     return (
