@@ -1,6 +1,12 @@
 import P from "prop-types";
 import "./App.css";
-import React, { useCallback, useEffect, useState, useMemo } from "react";
+import React, {
+    useCallback,
+    useEffect,
+    useState,
+    useMemo,
+    useRef,
+} from "react";
 
 const eventFn = () => {
     console.log("Event");
@@ -18,11 +24,14 @@ function App() {
     const [counter, setCounter] = useState(0);
     const [counter2, setCounter2] = useState(0);
     const [counter3, setCounter3] = useState(0);
+    const firstButtonElement = useRef(null);
 
     // Executes only the first time the component is rendered
     useEffect(() => {
         console.log("First render");
         document.querySelector("h1")?.addEventListener("click", eventFn);
+
+        console.log(firstButtonElement.current);
 
         // Clean up function, executes when the component is unmounted
         return () => {
@@ -51,7 +60,12 @@ function App() {
             <h1>
                 C1: {counter} C2: {counter2} C3: {counter3}
             </h1>
-            <button onClick={() => setCounter(counter + 1)}>+</button>
+            <button
+                ref={firstButtonElement}
+                onClick={() => setCounter(counter + 1)}
+            >
+                +
+            </button>
             <button onClick={() => setCounter2(counter2 + 1)}>+ (2)</button>
             {useMemo(() => {
                 <Button incrementButton={incrementCounter3} />;
