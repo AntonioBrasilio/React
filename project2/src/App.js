@@ -1,4 +1,6 @@
-import { Button } from "./components/Button";
+import { Button3 } from "./components/Button3";
+import { Button1, Counter1Value } from "./components/Button1";
+import { AppContext } from "./components/contexts/AppContext";
 import "./App.css";
 import React, {
     useCallback,
@@ -6,29 +8,13 @@ import React, {
     useState,
     useMemo,
     useRef,
-    createContext,
-    useContext,
 } from "react";
 
 const eventFn = () => {
     console.log("Event");
 };
 
-const Button2 = () => {
-    const { setCounter, secondButtonElement } = useContext(GlobalContext);
-
-    const handleClick = () => {
-        setCounter((c) => c + 1);
-        secondButtonElement.current.focus();
-    };
-
-    return <button onClick={handleClick}>+</button>;
-};
-
-const GlobalContext = createContext();
-
 function App() {
-    const [counter, setCounter] = useState(0);
     const [counter2, setCounter2] = useState(0);
     const [counter3, setCounter3] = useState(0);
     const secondButtonElement = useRef(null);
@@ -51,24 +37,22 @@ function App() {
     // });
 
     // Executes only when the dependencies changes
-    useEffect(() => {
-        console.log("Counter changed", counter);
-    }, [counter]);
+    // useEffect(() => {
+    //     console.log("Counter changed", counter1);
+    // }, [counter1]);
 
     const incrementCounter3 = useCallback((num) => {
         setCounter3((c) => c + num);
     }, []);
 
     return (
-        <GlobalContext.Provider
-            value={{ counter, setCounter, secondButtonElement }}
-        >
+        <AppContext>
             <div className="App">
                 <p>Test 1</p>
                 <h1>
-                    C1: {counter} C2: {counter2} C3: {counter3}
+                    C1: <Counter1Value /> C2: {counter2} C3: {counter3}
                 </h1>
-                <Button2 />
+                <Button1 elementRef={secondButtonElement} />
                 <button
                     ref={secondButtonElement}
                     onClick={() => setCounter2(counter2 + 1)}
@@ -76,10 +60,10 @@ function App() {
                     + (2)
                 </button>
                 {useMemo(() => {
-                    return <Button incrementButton={incrementCounter3} />;
+                    return <Button3 incrementButton={incrementCounter3} />;
                 }, [incrementCounter3])}
             </div>
-        </GlobalContext.Provider>
+        </AppContext>
     );
 }
 
