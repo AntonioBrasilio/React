@@ -1,4 +1,4 @@
-import P from "prop-types";
+import { Button } from "./components/Button";
 import "./App.css";
 import React, {
     useCallback,
@@ -26,14 +26,6 @@ const Button2 = () => {
 };
 
 const GlobalContext = createContext();
-
-const Button = ({ incrementButton }) => {
-    return <button onClick={() => incrementButton(100)}>+</button>;
-};
-
-Button.propTypes = {
-    incrementButton: P.func,
-};
 
 function App() {
     const [counter, setCounter] = useState(0);
@@ -84,7 +76,7 @@ function App() {
                     + (2)
                 </button>
                 {useMemo(() => {
-                    <Button incrementButton={incrementCounter3} />;
+                    return <Button incrementButton={incrementCounter3} />;
                 }, [incrementCounter3])}
             </div>
         </GlobalContext.Provider>
