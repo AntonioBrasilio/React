@@ -5,10 +5,10 @@ import { GlobalContext } from "../contexts/AppContext/index";
 export const Button1 = ({ elementRef }) => {
     const context = useContext(GlobalContext);
 
-    const { setState } = context;
+    const { dispatch } = context;
 
     const handleClick = () => {
-        setState((s) => ({ ...s, counter1: s.counter1 + 1 }));
+        dispatch({ type: "incrementButton1", payload: 1 });
         elementRef.current.focus();
     };
 

@@ -8,8 +8,8 @@ import React, {
     useState,
     useMemo,
     useRef,
-    useReducer,
 } from "react";
+import { Button4, Counter4Value } from "./components/Button4";
 
 const eventFn = () => {
     console.log("Event");
@@ -18,7 +18,6 @@ const eventFn = () => {
 function App() {
     const [counter2, setCounter2] = useState(0);
     const [counter3, setCounter3] = useState(0);
-    const [counter4, setCounter4] = useState(0);
     const secondButtonElement = useRef(null);
 
     // Executes only the first time the component is rendered
@@ -47,28 +46,13 @@ function App() {
         setCounter3((c) => c + num);
     }, []);
 
-    const reducer = (state, action) => {
-        switch (action.type) {
-            case "increment":
-                action.payload((s) => s + 1);
-                return { ...state };
-            case "decrement":
-                action.payload((s) => s - 1);
-                return { ...state };
-            default:
-                return { ...state };
-        }
-    };
-
-    const [, dispatch] = useReducer(reducer, counter4);
-
     return (
         <AppContext>
             <div className="App">
                 <p>Test 1</p>
                 <h1>
                     C1: <Counter1Value /> C2: {counter2} C3: {counter3} C4:{" "}
-                    {counter4}
+                    <Counter4Value />
                 </h1>
                 <Button1 elementRef={secondButtonElement} />
                 <button
@@ -80,20 +64,7 @@ function App() {
                 {useMemo(() => {
                     return <Button3 incrementButton={incrementCounter3} />;
                 }, [incrementCounter3])}
-                <button
-                    onClick={() =>
-                        dispatch({ type: "increment", payload: setCounter4 })
-                    }
-                >
-                    + (4)
-                </button>
-                <button
-                    onClick={() =>
-                        dispatch({ type: "decrement", payload: setCounter4 })
-                    }
-                >
-                    - (4)
-                </button>
+                <Button4 />
             </div>
         </AppContext>
     );
