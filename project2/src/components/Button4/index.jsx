@@ -1,4 +1,5 @@
 import P from "prop-types";
+import { actions } from "../reducer/actions";
 import { useContext } from "react";
 import { GlobalContext } from "../contexts/AppContext/index";
 
@@ -6,14 +7,17 @@ export const Button4 = () => {
     const context = useContext(GlobalContext);
     const { dispatch } = context;
 
+    const increment = (payload) => {
+        dispatch({ type: actions.INCREMENT, payload });
+    };
+    const decrement = (payload) => {
+        dispatch({ type: actions.DECREMENT, payload });
+    };
+
     return (
         <>
-            <button onClick={() => dispatch({ type: "increment", payload: 2 })}>
-                + (4)
-            </button>
-            <button onClick={() => dispatch({ type: "decrement", payload: 3 })}>
-                - (4)
-            </button>
+            <button onClick={() => increment(2)}>+ (4)</button>
+            <button onClick={() => decrement(3)}>- (4)</button>
         </>
     );
 };

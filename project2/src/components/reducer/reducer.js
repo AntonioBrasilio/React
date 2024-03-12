@@ -1,4 +1,5 @@
 export const reducer = (state, action) => {
+    console.log(action, "dasdasdasdsa");
     switch (action.type) {
         case "increment":
             return { ...state, counter4: state.counter4 + action.payload };

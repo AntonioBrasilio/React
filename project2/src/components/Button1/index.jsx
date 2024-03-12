@@ -1,4 +1,5 @@
 import P from "prop-types";
+import { actions } from "../reducer/actions";
 import { useContext } from "react";
 import { GlobalContext } from "../contexts/AppContext/index";
 
@@ -6,9 +7,12 @@ export const Button1 = ({ elementRef }) => {
     const context = useContext(GlobalContext);
 
     const { dispatch } = context;
+    const incrementButton1 = (payload) => {
+        dispatch({ type: actions.INCREMENT_BUTTON1, payload });
+    };
 
     const handleClick = () => {
-        dispatch({ type: "incrementButton1", payload: 1 });
+        incrementButton1(1);
         elementRef.current.focus();
     };
 
