@@ -6,3 +6,5 @@ To correct multiple files, you can type npx eslint *DIR* --fix -> Example  npx e
 The pluggins to install = npm i -D prettier eslint-config-prettier eslint-plugin-prettier
 
 To deactivate rules for eslint, just copy the rule that is showing on error, then go in "rules" and set to "off" in esling config file
+
+Creating your hook - https://overreacted.io/making-setinterval-declarative-with-react-hooks/
