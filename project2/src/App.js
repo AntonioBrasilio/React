@@ -18,7 +18,28 @@ const eventFn = () => {
 function App() {
     const [counter2, setCounter2] = useState(0);
     const [counter3, setCounter3] = useState(0);
+    const [counter5, setCounter5] = useState(0);
+    const [delay, setDelay] = useState(5000);
     const secondButtonElement = useRef(null);
+
+    // Custom hook
+    const useInterval = (cb, delay = 1000) => {
+        const savedCb = useRef();
+
+        useEffect(() => {
+            savedCb.current = cb;
+        }, [cb]);
+
+        useEffect(() => {
+            const interval = setInterval(() => {
+                savedCb.current();
+            }, delay);
+
+            return () => {
+                clearInterval(interval);
+            };
+        }, [delay]);
+    };
 
     // Executes only the first time the component is rendered
     useEffect(() => {
@@ -46,13 +67,15 @@ function App() {
         setCounter3((c) => c + num);
     }, []);
 
+    useInterval(() => setCounter5((c) => c + 1), delay);
+
     return (
         <AppContext>
             <div className="App">
                 <p>Test 1</p>
                 <h1>
                     C1: <Counter1Value /> C2: {counter2} C3: {counter3} C4:{" "}
-                    <Counter4Value />
+                    <Counter4Value /> C5: {counter5} delay: {delay}
                 </h1>
                 <Button1 elementRef={secondButtonElement} />
                 <button
@@ -65,6 +88,7 @@ function App() {
                     return <Button3 incrementButton={incrementCounter3} />;
                 }, [incrementCounter3])}
                 <Button4 />
+                <button onClick={() => setDelay((c) => c - 500)}>- (5)</button>
             </div>
         </AppContext>
     );
