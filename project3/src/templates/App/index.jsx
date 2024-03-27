@@ -1,10 +1,12 @@
+import { Posts } from '../../components/Posts';
+import { PostsProvider } from '../../contexts/PostsProvider';
 import './styles.css';
 
 function App() {
     return (
-        <div>
-            <h1>Oi</h1>
-        </div>
+        <PostsProvider>
+            <Posts />
+        </PostsProvider>
     );
 }
 
